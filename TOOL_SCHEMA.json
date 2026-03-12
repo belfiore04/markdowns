@@ -7,7 +7,7 @@
             "properties": {
                 "path": {
                     "type": "string",
-                    "description": "文件的相对路径，如 'SOUL.md'、'USER.md'、'CHARACTER.md'、'LONG_TERM_MEMORY.md' 或 '2026-03-02.md'"
+                    "description": "文件的相对路径，如 'SOUL.md'、'USER.md'、'CHARACTER.md'、'MEMORY.md' 或 '2026-03-02.md'"
                 }
             },
             "required": [

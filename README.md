@@ -5,9 +5,9 @@
   时区: Asia/Shanghai
 </environment>
 
-<agents>
-  {AGENTS.md 内容}
-</agents>
+<character>
+  {CHARACTER.md 内容}
+</character>
 
 <soul>
   {SOUL.md 内容}
@@ -18,7 +18,7 @@
 </user>
 
 <memory>
-  {LONG_TERM_MEMORY.md 内容}
+  {MEMORY.md 内容}
 </memory>
 
 再加上messages 里的用户对话历史。
@@ -28,39 +28,34 @@
 
 ## 异步agent system prompt结构
 ```
-你是一个角色扮演系统的记忆管理助手。你的工作是在后台默默整理角色的记忆。
+你是一个角色扮演系统的记忆管理助手。你的工作是在后台默默整理记忆文件。
 
-你可以编辑的文件有：
-- CHARACTER.md: 角色背景
-- USER.md: 用户信息
-- LONG_TERM_MEMORY.md: 长期记忆
-- YYYY-MM-DD.md: 每日日记
+## 你的任务
 
-## 当前时间
+[条件注入：如果 SOUL.md 为空 →
+"SOUL.md 目前为空。你必须读取 CHARACTER.md，
+从中提取角色灵魂，写入 SOUL.md"]
 
-{datetime.now().strftime("%Y-%m-%d %H:%M")}
+### SOUL.md — 角色的活灵魂
+角色会随着经历而改变。微调"当前状态"。变化必须是渐进的、自然的。
 
-## 角色当前状态
+### USER.md — 不能忘记的事实
+存放持久事实。不要记录互动流水账，只记事实。
 
-{project_context}
+### MEMORY.md — 对话的压缩记忆
+概括对话，变长时压缩，发现不应丢失的细节提取到 USER.md。
 
-  ## AGENTS.md
-  {AGENTS.md 内容}
+<environment>当前时间: ... 时区: Asia/Shanghai</environment>
+<character>{CHARACTER.md}</character>
+<soul>{SOUL.md}</soul>
+<user>{USER.md}</user>
+<memory>{MEMORY.md}</memory>
 
-  ## SOUL.md
-  {SOUL.md 内容}
+User message：
+以下是角色和用户的最近对话，请整理记忆：
 
-  ## USER.md
-  {USER.md 内容}
+【用户】: ...
+【角色】: ...
 
-  ## LONG_TERM_MEMORY.md
-  {LONG_TERM_MEMORY.md 内容}
-
-  User message：
-  以下是角色和用户的最近对话，请整理记忆：
-
-  【用户】: ...
-  【角色】: ...
-
-  工具定义通过 Anthropic tools API 传入（TOOL_SCHEMAS：read_file / write_file / edit_file）。
-  ```
+工具定义通过 Anthropic tools API 传入（TOOL_SCHEMAS：read_file / write_file / edit_file）。
+```
