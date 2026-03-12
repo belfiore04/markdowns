@@ -1,10 +1,9 @@
-# USER.md - About Your Human
+# USER.md
 
-- **Name:** 
-- **What to call them:** 
-- **关系:** 
-- **身份:** 
+## 身份
+
+## 性格
 
 ## 喜好
 
-## 习惯
+## 与角色的关系
